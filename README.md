@@ -19,6 +19,9 @@ This repository contains the preliminary systems analysis for a Smart Campus Ene
   * `observacion_directa.csv`: Logs of physical walkthroughs in classrooms and labs, cross-referencing occupancy status with energy waste (lights and computers left on in empty rooms).
 * `/docs`: Contains the final IEEE format paper (`.pdf`) and the LaTeX source code.
 * `/assets`: Contains the system architecture diagrams and survey data visualizations.
+  *`/Grafico_Encuestas.png`:Pie chart showing the frequency of manual light switch-off.
+  *`IMG-20260307-WA0006`:Data Architecture and Analytical Flow.
+  *`IMG-20260307-WA0007`:Detailed IoT architecture and data flow diagram.
 
 ## Methodology (Primary Data Collection)
 To validate the necessity of an automated IoT architecture, we triangulated three non-invasive data collection techniques:
