@@ -16,6 +16,7 @@ This repository contains the preliminary systems analysis for a Smart Campus Ene
   * `luminosidad_caso_2_lluvia_16_00_pico_09_00.csv`: Environmental daylight correlation data (Case 2: Rainy afternoon with an early peak at 09:00).
   * `luminosidad_caso_3_lluvias_08_00_15_00_picos_07_00_12_00_16_30.csv`: Environmental daylight correlation data (Case 3: Intermittent rain and multiple weather fluctuations).
   * `Datos_encuestas.csv`: Raw structured survey responses from 35 participants regarding their energy consumption habits and institutional awareness.
+  * `observacion_directa.csv`: Logs of physical walkthroughs in classrooms and labs, cross-referencing occupancy status with energy waste (lights and computers left on in empty rooms).
 * `/docs`: Contains the final IEEE format paper (`.pdf`) and the LaTeX source code.
 * `/assets`: Contains the system architecture diagrams and survey data visualizations.
 
