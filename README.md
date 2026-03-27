@@ -18,6 +18,8 @@ This repository contains the preliminary systems analysis for a Smart Campus Ene
   * `Datos_encuestas.csv`: Raw structured survey responses from 35 participants regarding their energy consumption habits and institutional awareness.
   * `observacion_directa.csv`: Logs of physical walkthroughs in classrooms and labs, cross-referencing occupancy status with energy waste (lights and computers left on in empty rooms).
 * `/docs`: Contains the final IEEE format paper (`.pdf`) and the LaTeX source code.
+  * `Workshop_1.pdf` & `Workshop_1.tex`: Phase 1 - Systems Analysis.
+  * `Workshop_2.pdf` & `Workshop_2.tex`: Phase 2 - System Design Document (includes TikZ native diagrams).
 * `/assets`: Contains the system architecture diagrams and survey data visualizations.
   *`/Grafico_Encuestas.png`:Pie chart showing the frequency of manual light switch-off.
   *`IMG-20260307-WA0006`:Data Architecture and Analytical Flow.
