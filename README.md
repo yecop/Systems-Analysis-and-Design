@@ -21,9 +21,9 @@ This repository contains the preliminary systems analysis for a Smart Campus Ene
   * `Workshop_1.pdf` & `Workshop_1.tex`: Phase 1 - Systems Analysis.
   * `Workshop_2.pdf` & `Workshop_2.tex`: Phase 2 - System Design Document (includes TikZ native diagrams).
 * `/assets`: Contains the system architecture diagrams and survey data visualizations.
-  *`/Grafico_Encuestas.png`:Pie chart showing the frequency of manual light switch-off.
-  *`IMG-20260307-WA0006`:Data Architecture and Analytical Flow.
-  *`IMG-20260307-WA0007`:Detailed IoT architecture and data flow diagram.
+  * `/Grafico_Encuestas.png`:Pie chart showing the frequency of manual light switch-off.
+  * `IMG-20260307-WA0006`:Data Architecture and Analytical Flow.
+  * `IMG-20260307-WA0007`:Detailed IoT architecture and data flow diagram.
 
 ## Methodology (Primary Data Collection)
 To validate the necessity of an automated IoT architecture, we triangulated three non-invasive data collection techniques:
