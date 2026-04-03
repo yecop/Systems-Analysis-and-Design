@@ -1,37 +1,50 @@
-# Smart Campus Energy Management System: A Systems Analysis Approach
+# Smart Campus Energy Management System: Analysis, Design & Management
 
 ## Project Overview
-This repository contains the preliminary systems analysis for a Smart Campus Energy Management System, designed to evaluate and optimize energy usage in the Engineering Faculty building of Universidad Distrital Francisco José de Caldas. The project utilizes IoT monitoring concepts to map human behavior and implement automated recommendations, aiming to significantly reduce energy waste.
+This repository contains the complete systems engineering lifecycle—from preliminary systems analysis to robust software design and project management—for a Smart Campus Energy Management System. Focused on the Engineering Faculty building of Universidad Distrital Francisco José de Caldas, the project evolves from utilizing IoT monitoring concepts to mapping human behavior, and ultimately designing a decentralized, software-defined Proof of Concept (PoC) with autonomous user-space agents, fault tolerance, and comprehensive risk mitigation.
 
-## Authors
+## Authors (Engineering Team)
 * **Omar Yesid Fonseca López** - oyfonsecal@udistrital.edu.co
 * **Daniel Felipe Barrera Suárez** - dfbarreras@udistrital.edu.co
 * **Daniel Mateo Ballesteros Molina** - dmballesterosm@udistrital.edu.co
 * **Dania Lizeth Guzmán Triviño** - dlguzmant@udistrital.edu.co
 
 ## Repository Structure
-* `/data`: Contains the primary datasets collected during the field research.
-  * `observacion_directa.csv`: Logs of physical walkthroughs checking occupancy vs. energy waste.
-  * `luminosidad_caso_1_sin_lluvia_pico_13_00.csv`: Environmental daylight correlation data (Case 1: Sunny day with peak luminosity at 13:00).
-  * `luminosidad_caso_2_lluvia_16_00_pico_09_00.csv`: Environmental daylight correlation data (Case 2: Rainy afternoon with an early peak at 09:00).
-  * `luminosidad_caso_3_lluvias_08_00_15_00_picos_07_00_12_00_16_30.csv`: Environmental daylight correlation data (Case 3: Intermittent rain and multiple weather fluctuations).
-  * `Datos_encuestas.csv`: Raw structured survey responses from 35 participants regarding their energy consumption habits and institutional awareness.
-  * `observacion_directa.csv`: Logs of physical walkthroughs in classrooms and labs, cross-referencing occupancy status with energy waste (lights and computers left on in empty rooms).
-* `/docs`: Contains the final IEEE format paper (`.pdf`) and the LaTeX source code.
-  * `Workshop_1.pdf` & `Workshop_1.tex`: Phase 1 - Systems Analysis.
-  * `Workshop_2.pdf` & `Workshop_2.tex`: Phase 2 - System Design Document (includes TikZ native diagrams).
-* `/assets`: Contains the system architecture diagrams and survey data visualizations.
-  * `/Grafico_Encuestas.png`:Pie chart showing the frequency of manual light switch-off.
-  * `IMG-20260307-WA0006`:Data Architecture and Analytical Flow.
-  * `IMG-20260307-WA0007`:Detailed IoT architecture and data flow diagram.
-
-## Methodology (Primary Data Collection)
-To validate the necessity of an automated IoT architecture, we triangulated three non-invasive data collection techniques:
-1. **Direct Observation:** Quantifying the frequency of energy waste (lights/computers left on in empty rooms).
-2. **Structured Surveys (n=35):** Assessing user awareness and the "human-in-the-loop" bottleneck.
-3. **Environmental Correlation:** Measuring natural light levels (lux) to identify Daylight Harvesting opportunities.
-
-## Key Findings
-The analysis revealed a significant gap between sustainability perception and practical actions. The manual management of energy relies heavily on human memory, creating an inertia phenomenon where energy waste is normalized. Transitioning to an automated, IoT-based architecture is highly justified to mitigate human error and provide real-time efficiency alerts.
+Following computer science collaboration guidelines, the repository is organized as follows:
+* `/assets/diagrams`: Contains the system architecture diagrams, flowcharts, and survey data visualizations (e.g., `Grafico_Encuestas.png`).
+* `/data`: Contains the primary datasets collected during the field research (e.g., surveys, lux meter readings, direct observation logs).
+* `/docs`: Contains the final IEEE format papers (`.pdf`) and the LaTeX source codes for Workshop 1 and Workshop 2.
+* `/experiments` & `/results`: Directories reserved for future PoC testing and analytical outputs.
+* `/references`: Directory for literature review and external bibliography.
+* `/src/agent`: Autonomous telemetry agent source code (Python).
+* `/Workshop_3_Management`: Contains the Enhanced System Design and Project Management Document (Workshop 3).
 
 ---
+
+## Phase 1: Systems Analysis (Workshop 1)
+### Methodology & Key Findings
+To validate the necessity of an automated architecture, we triangulated three non-invasive data collection techniques: Direct Observation, Structured Surveys (n=35), and Environmental Correlation. The analysis revealed a significant gap between sustainability perception and practical actions. The manual management of energy relies heavily on human memory, creating an inertia phenomenon where energy waste is normalized. 
+
+---
+
+## Phase 2: Systems Design (Workshop 2)
+### Key Design Decisions
+Given strict institutional IT constraints (no administrator privileges, no centralized orchestrator servers), the design pivoted to a decentralized, **Software-Defined (User-Space)** architecture:
+* **Autonomous Agents:** Python executables (`.exe`) running independently on each workstation.
+* **Non-Invasive Actions:** Utilization of behavioral nudges (full-screen deterrents) and local OS Suspend states to prevent data loss.
+* **Cloud Persistence:** Telemetry is sent to a cloud MySQL DBaaS and Telegram API.
+
+---
+
+## Phase 3: Robust Design & Project Management (Workshop 3)
+### Overview
+This phase elevates the conceptual design into a production-ready Proof of Concept (PoC). It introduces fault-tolerance mechanisms, comprehensive risk management (ISO 31000), software quality assurance (ISO/IEC 25010), and a detailed project execution plan to ensure safe implementation in a highly restrictive academic environment.
+
+### Key Enhancements & Management
+* **Fault-Tolerant Architecture:** Implementation of a local encrypted CSV persistence module (Fallback) to handle institutional firewall blocks and deferred synchronization.
+* **Risk Mitigation (QA):** Strict CPU load validation (>20%) before any suspension sequence to ensure critical academic background tasks are not interrupted.
+* **Operational Planning:** A structured 6-week schedule, explicit team roles definition, and a resource management plan.
+
+### Deliverables
+* [📄 Project Management and Enhanced Design Document (PDF)](./Workshop_3_Management/Workshop_3_Report.pdf)
+* [💻 LaTeX Source Code](./Workshop_3_Management/Workshop_3_Report.tex)
