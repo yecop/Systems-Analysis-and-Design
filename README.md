@@ -1,7 +1,7 @@
-# Smart Campus Energy Management System: Analysis, Design & Management
+# Smart Campus Energy Management System
 
 ## Project Overview
-This repository contains the complete systems engineering lifecycle—from preliminary systems analysis to robust software design and project management—for a Smart Campus Energy Management System. Focused on the Engineering Faculty building of Universidad Distrital Francisco José de Caldas, the project evolves from utilizing IoT monitoring concepts to mapping human behavior, and ultimately designing a decentralized, software-defined Proof of Concept (PoC) with autonomous user-space agents, fault tolerance, and comprehensive risk mitigation.
+This repository contains the complete systems engineering lifecycle—from preliminary systems analysis to robust software design, project management, and computational simulation—for a Smart Campus Energy Management System. Focused on the Engineering Faculty building of Universidad Distrital Francisco José de Caldas, the project evolves from evaluating human-driven energy waste to validating a decentralized, software-defined Proof of Concept (PoC) with autonomous user-space agents.
 
 ## Authors (Engineering Team)
 * **Omar Yesid Fonseca López** - oyfonsecal@udistrital.edu.co
@@ -10,41 +10,33 @@ This repository contains the complete systems engineering lifecycle—from preli
 * **Dania Lizeth Guzmán Triviño** - dlguzmant@udistrital.edu.co
 
 ## Repository Structure
-Following computer science collaboration guidelines, the repository is organized as follows:
-* `/assets/diagrams`: Contains the system architecture diagrams, flowcharts, and survey data visualizations (e.g., `Grafico_Encuestas.png`).
-* `/data`: Contains the primary datasets collected during the field research (e.g., surveys, lux meter readings, direct observation logs).
-* `/docs`: Contains the final IEEE format papers (`.pdf`) and the LaTeX source codes for Workshop 1 and Workshop 2.
-* `/experiments` & `/results`: Directories reserved for future PoC testing and analytical outputs.
-* `/references`: Directory for literature review and external bibliography.
-* `/src/agent`: Autonomous telemetry agent source code (Python).
-* `/Workshop_3_Management`: Contains the Enhanced System Design and Project Management Document (Workshop 3).
+Following the Computer Science Collaboration Guidelines, the repository is organized as follows:
+* `/assets/diagrams/`: System architecture diagrams, flowcharts, and performance charts.
+* `/data/`: Primary datasets collected during field research (Workshop 1).
+* `/docs/`: Final IEEE format papers and design documents (Workshops 1 & 2).
+* `/src/agent/`: Autonomous telemetry agent source code for production (Python).
+* `/Workshop3_Management/`: Project Management and Enhanced Design Document.
+* `/Workshop_4_Simulation/`: System Simulation Report, simulator code (`/code`), and synthetic datasets (`/results`).
 
 ---
 
 ## Phase 1: Systems Analysis (Workshop 1)
-### Methodology & Key Findings
-To validate the necessity of an automated architecture, we triangulated three non-invasive data collection techniques: Direct Observation, Structured Surveys (n=35), and Environmental Correlation. The analysis revealed a significant gap between sustainability perception and practical actions. The manual management of energy relies heavily on human memory, creating an inertia phenomenon where energy waste is normalized. 
-
----
+To validate the necessity of an automated architecture, we triangulated Direct Observation, Structured Surveys (n=35), and Environmental Correlation. The analysis revealed a significant gap between sustainability perception and practical actions, demonstrating that energy waste is primarily driven by human behavioral inertia.
 
 ## Phase 2: Systems Design (Workshop 2)
-### Key Design Decisions
-Given strict institutional IT constraints (no administrator privileges, no centralized orchestrator servers), the design pivoted to a decentralized, **Software-Defined (User-Space)** architecture:
-* **Autonomous Agents:** Python executables (`.exe`) running independently on each workstation.
-* **Non-Invasive Actions:** Utilization of behavioral nudges (full-screen deterrents) and local OS Suspend states to prevent data loss.
-* **Cloud Persistence:** Telemetry is sent to a cloud MySQL DBaaS and Telegram API.
-
----
+Given strict institutional IT constraints (no administrator privileges), the design pivoted to a decentralized, **Software-Defined (User-Space)** architecture using Python executables (`.exe`), behavioral nudges, and local OS Suspend states.
 
 ## Phase 3: Robust Design & Project Management (Workshop 3)
-### Overview
-This phase elevates the conceptual design into a production-ready Proof of Concept (PoC). It introduces fault-tolerance mechanisms, comprehensive risk management (ISO 31000), software quality assurance (ISO/IEC 25010), and a detailed project execution plan to ensure safe implementation in a highly restrictive academic environment.
+This phase elevated the conceptual design into a production-ready PoC by introducing fault-tolerance mechanisms (Encrypted CSV Fallbacks for firewall blocks), strict CPU load validation (>20%), and a comprehensive project execution plan (ISO 31000 Risk Management).
+* **Deliverables:** [Project Management and Enhanced Design Document](./Workshop3_Management/Workshop_3_Report.pdf)
 
-### Key Enhancements & Management
-* **Fault-Tolerant Architecture:** Implementation of a local encrypted CSV persistence module (Fallback) to handle institutional firewall blocks and deferred synchronization.
-* **Risk Mitigation (QA):** Strict CPU load validation (>20%) before any suspension sequence to ensure critical academic background tasks are not interrupted.
-* **Operational Planning:** A structured 6-week schedule, explicit team roles definition, and a resource management plan.
+## Phase 4: System Simulation and Validation (Workshop 4)
+We implemented a discrete-event simulation model in Python to test the architecture against stochastic campus variables (e.g., 80% forgetfulness probability, 15% high-CPU load probability). 
+* **Key Finding:** The autonomous agent achieved a **68.72% net reduction** in wasted energy while successfully avoiding false positives that could disrupt critical academic workflows. 
+* **Complexity Analysis:** Sensitivity analysis proved that the 20% CPU threshold acts as the system's optimal attractor, preventing system paralysis caused by background OS noise.
 
-### Deliverables
-* [📄 Project Management and Enhanced Design Document (PDF)](./Workshop_3_Management/Workshop_3_Report.pdf)
-* [💻 LaTeX Source Code](./Workshop_3_Management/Workshop_3_Report.tex)
+**Phase 4 Deliverables:**
+* [📄 System Simulation and Validation Report (PDF)](./Workshop_4_Simulation/Workshop_4_Report.pdf)
+* [💻 Discrete-Event Simulator Source Code](./Workshop_4_Simulation/code/simulator.py)
+* [📊 Data Visualization Script](./Workshop_4_Simulation/code/plot_results.py)
+* [📈 Synthetic Telemetry Dataset](./Workshop_4_Simulation/results/simulation_results.csv)
