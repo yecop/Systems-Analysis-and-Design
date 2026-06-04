@@ -1,17 +1,17 @@
 import time
 import psutil
-import csv
 import os
 import requests
 import ctypes
 import tkinter as tk
 from datetime import datetime
 
+from fallback_manager import log_fallback_event
+from database_connector import sync_to_cloud_database
 
 IDLE_THRESHOLD_MINUTES = 15
 CPU_THRESHOLD_PERCENT = 20.0
 NUDGE_TIMEOUT_SECONDS = 60
-CSV_LOG_FILE = "telemetry_fallback.csv"
 TELEGRAM_BOT_URL = "https://api.telegram.org/bot<TOKEN>/sendMessage"
 CHAT_ID = "<CHAT_ID>"
 
@@ -29,17 +29,11 @@ def get_idle_time_seconds():
         return millis / 1000.0
     return 0.0
 
-def log_fallback_event(event_type, status):
-    file_exists = os.path.isfile(CSV_LOG_FILE)
+def safe_log_event(event_type, status):
     try:
-        with open(CSV_LOG_FILE, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            if not file_exists:
-                writer.writerow(["Timestamp", "Equipo", "Tipo_Evento", "Estado"])
-            pc_name = os.environ.get('COMPUTERNAME', 'PC_Desconocido')
-            writer.writerow([datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pc_name, event_type, status])
-    except Exception as e:
-        print(f"Error escribiendo en CSV local: {e}")
+        sync_to_cloud_database(event_type, status)
+    except Exception:
+        log_fallback_event(event_type, status)
 
 def send_alert_telegram(message):
     try:
@@ -47,7 +41,7 @@ def send_alert_telegram(message):
         response = requests.post(TELEGRAM_BOT_URL, json=data, timeout=5)
         response.raise_for_status()
     except requests.exceptions.RequestException:
-        log_fallback_event("Intento_Alerta_Red", "Fallo_Conexion_Firewall")
+        safe_log_event("Intento_Alerta_Red", "Fallo_Conexion_Telegram")
 
 def show_nudge_and_wait():
     root = tk.Tk()
@@ -79,7 +73,6 @@ def show_nudge_and_wait():
             root.destroy()
 
     countdown(NUDGE_TIMEOUT_SECONDS)
-    
     root.focus_force()
     root.mainloop()
 
@@ -87,14 +80,13 @@ def show_nudge_and_wait():
 
 def suspend_os():
     pc_name = os.environ.get('COMPUTERNAME', 'PC_Desconocido')
-    send_alert_telegram(f"Alerta: El equipo {pc_name} será suspendido por inactividad prolongada.")
-    log_fallback_event("Suspension_OS", "Ejecutado")
+    send_alert_telegram(f"Alerta: El equipo {pc_name} ha sido suspendido por inactividad prolongada.")
     
     ctypes.windll.powrprof.SetSuspendState(False, True, False)
 
 def autonomous_agent_loop():
     print(f"=== Agente Smart Campus Iniciado en {os.environ.get('COMPUTERNAME')} ===")
-    log_fallback_event("Agente_Inicio", "OK")
+    safe_log_event("Agente_Inicio", "OK")
     
     while True:
         try:
@@ -104,4 +96,30 @@ def autonomous_agent_loop():
                 cpu_usage = psutil.cpu_percent(interval=2)
                 
                 if cpu_usage < CPU_THRESHOLD_PERCENT:
-                    canceled
+                    print("Inactividad detectada. Lanzando Nudge...")
+                    
+                    user_canceled = show_nudge_and_wait()
+                    
+                    if user_canceled:
+                        print("El usuario canceló la suspensión.")
+                        safe_log_event("Nudge_Interactivo", "Cancelado_Por_Usuario")
+                        time.sleep(300)
+                    else:
+                        print("Usuario no respondió. Suspendiendo OS...")
+                        safe_log_event("Suspension_OS", "Ejecutado") 
+                        suspend_os()
+                        
+                else:
+                    print(f"Carga CPU alta ({cpu_usage}%). Protegiendo datos de usuario.")
+                    safe_log_event("Proteccion_CPU_R02", f"Activada_{cpu_usage}%")
+                    time.sleep(300)
+            
+            time.sleep(60)
+
+        except Exception as e:
+            print(f"Error general en el ciclo: {e}")
+            safe_log_event("Error_Agente_Ciclo", str(e))
+            time.sleep(60)
+
+if __name__ == "__main__":
+    autonomous_agent_loop()
