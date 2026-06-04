@@ -1,0 +1,8 @@
+# Monitoreo de recursos del sistema (Carga de CPU)
+psutil==5.9.8
+
+# Conexión HTTPS para la API de Telegram
+requests==2.31.0
+
+# Conector oficial para la base de datos MySQL en la nube
+mysql-connector-python==8.3.0
