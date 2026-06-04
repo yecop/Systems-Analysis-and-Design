@@ -1,0 +1,158 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+
+\begin{document}
+
+\title{Smart Campus Energy Management System: A Systems Analysis Approach}
+
+\author{
+\IEEEauthorblockN{Omar Yesid Fonseca López}
+\IEEEauthorblockA{\textit{Systems Engineering Program} \\
+\textit{Universidad Distrital Francisco José de Caldas}\\
+Bogotá, Colombia \\
+oyfonsecal@udistrital.edu.co}
+\and
+\IEEEauthorblockN{Daniel Felipe Barrera Suárez}
+\IEEEauthorblockA{\textit{Systems Engineering Program} \\
+\textit{Universidad Distrital Francisco José de Caldas}\\
+Bogotá, Colombia \\
+dfbarreras@udistrital.edu.co}
+\and
+\IEEEauthorblockN{Daniel Mateo Ballesteros Molina}
+\IEEEauthorblockA{\textit{Systems Engineering Program} \\
+\textit{Universidad Distrital Francisco José de Caldas}\\
+Bogotá, Colombia \\
+dmballesterosm@udistrital.edu.co}
+\and
+\IEEEauthorblockN{Dania Lizeth Guzmán Triviño}
+\IEEEauthorblockA{\textit{Systems Engineering Program} \\
+\textit{Universidad Distrital Francisco José de Caldas}\\
+Bogotá, Colombia \\
+dlguzmant@udistrital.edu.co}
+}
+
+\maketitle
+
+\begin{abstract}
+High energy consumption is a constant challenge for universities, due to both costs and environmental impact. This paper presents the initial analysis to design a Smart Energy Management System focused on the Engineering Faculty building. Through real data collection on campus, the results suggest that monitoring user behavior and sending automatic recommendations can significantly reduce lighting waste and improve the use of computing equipment.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Systems Analysis, IoT, Energy Management, Smart Campus
+\end{IEEEkeywords}
+
+\section{Introduction}
+Controlling energy expenditure at the university is becoming increasingly important. The objective of this project is to propose an Internet of Things (IoT) based system to monitor and optimize this consumption, displaying the data on a dashboard to send alerts. The main stakeholders in this system are the administration, maintenance staff, and us, the students.
+
+To make the project viable within the time we had, we focused only on the Engineering Faculty building, specifically checking the lighting and computers in classrooms and laboratories. Unlike other centralized systems, our idea takes the human factor into account. In fact, recent literature shows that occupant behavior can affect a building's energy consumption by up to 150\% \cite{b2}. We aim to correct this problem through user notifications. The project data and repository can be viewed at: \url{https://github.com/yecop/Systems-Analysis-and-Design}.
+
+\section{Methods and Materials}
+
+To see how energy is actually being spent in the Faculty, we used three data collection methods: direct observation, a community survey, and natural light measurement using lux meters. This allowed us to gather accurate data and also learn about the habits of students and professors (see Fig. \ref{fig:entorno}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{IMG-20260307-WA0007.jpg}
+    \caption{Representation of the study environment in the Engineering Faculty.}
+    \label{fig:entorno}
+\end{figure}
+
+\subsection{Methodology Design}
+
+First, we conducted direct observation walkthroughs of the faculty during five business days at peak hours. We recorded in a matrix how many classrooms and labs were empty but had lights on or computers left running, to see how often this waste occurred.
+
+Second, we administered a short survey (less than 5 minutes) to students and teachers. We wanted to know how often they turn off lights or equipment when leaving, rate from 1 to 5 how important they think saving energy is, and if they know of any official university campaigns on the topic. Responses were completely anonymous.
+
+Finally, we used lux meter apps on smartphones to measure natural light in classrooms under different weather conditions. We established three profiles: a sunny day (with a light peak at noon), a day with heavy rain in the afternoon, and a day with intermittent rain. This helped us figure out exactly when it is not necessary to turn on the lights, a technique known as Daylight Harvesting \cite{b3}.
+
+\subsection{Primary Data Presentation and Quality Assessment}
+
+We compiled all the data into tables and charts to analyze the problem. Below, we show a summary of the natural light measurements (see Table \ref{tab:luxometro}) and what we observed during the classroom walkthroughs (see Table \ref{tab:observacion}).
+
+\begin{table}[H]
+    \centering
+    \caption{Sample Lux Meter and Environmental Correlation Data}
+    \label{tab:luxometro}
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \textbf{Case} & \textbf{Time} & \textbf{Room} & \textbf{Avg Lux} & \textbf{Active Lights?} & \textbf{Weather} \\
+        \hline
+        1 & 13:00 & 301 & 0.0101 & Yes & Sunny \\
+        2 & 16:00 & 205 & 0.0102 & Yes & Heavy Rain \\
+        3 & 08:00 & 102 & 0.0101 & Yes & Rain \\
+        \hline
+    \end{tabular}%
+    }
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Excerpt of Data Collected by Direct Observation}
+    \label{tab:observacion}
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Date and Time} & \textbf{Room} & \textbf{Occupied?} & \textbf{Lights On?} & \textbf{PCs On?} \\
+        \hline
+        23-Feb 09:00 & 202 (Class) & No & No & N/A \\
+        23-Feb 13:00 & 301 (Class) & No & Yes & N/A \\
+        24-Feb 18:00 & 500 (Lab) & No & Yes & Yes \\
+        25-Feb 13:00 & 704 (Lab) & No & Yes & No \\
+        \hline
+    \end{tabular}%
+    }
+\end{table}
+
+It should be noted that this methodology has some limitations. For safety reasons regarding electrical panels, we could not measure the wires to find the exact watts consumed. Additionally, when people know they are being evaluated, they sometimes change their behavior (Hawthorne Effect \cite{b4}), and in surveys, many give politically correct answers. To solve this in future phases of the project, we propose installing real IoT sensors in the classrooms, which will provide exact data without human interference.
+
+\section{Results and Discussion}
+
+\subsection{Element and Relationship Analysis}
+The proposed IoT system has three parts: inputs (natural light data and presence sensors), processing (where data is aggregated), and outputs (user alerts). As seen in Fig. \ref{fig:arquitectura}, the classroom environment and people's habits depend heavily on occupancy changes throughout the day.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{IMG-20260307-WA0006.jpg}
+    \caption{IoT System Architecture and Relationship Map.}
+    \label{fig:arquitectura}
+\end{figure}
+
+\subsection{Survey Analysis and User Behavior}
+By analyzing the academic community's responses, we confirmed that the human factor is the biggest problem to solve.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Grafico_Encuestas.png} 
+    \caption{Frequency of manual light switch-off reported by users.}
+    \label{fig:encuestas}
+\end{figure}
+
+The surveys (n=35) showed a large gap between what people think and what they actually do. Almost everyone rated energy saving as super important, but in practice, their habits say otherwise. 
+
+By cross-referencing how people behave (see Fig. \ref{fig:encuestas}) with what we saw in the physical walkthroughs (see Table \ref{tab:observacion}) and the weather data (see Table \ref{tab:luxometro}), it is evident that manual control does not work. Many admit they forget to turn off the light when leaving, and this matches the empty labs we found with PCs left on, and even lights on when the sun was shining directly through the window. This becomes a habit and waste becomes normalized throughout the day.
+
+Furthermore, about 80\% of people said they did not know of any official university energy-saving protocol. Because of all this, automating management with IoT makes perfect sense. Not only would it help turn things off when forgotten, but the notifications would also help educate students in real time.
+
+\section{Conclusions}
+This analysis helped us understand the real problem before building the Smart Energy Management System. By clearly defining the scope and collecting data directly in the faculty, we now have the foundation for the future IoT network. The next step will be to use all this collected information to properly program the logic for the system's automatic recommendations.
+
+\begin{thebibliography}{00}
+\bibitem{b1} C. A. Sierra, ``Workshop No. 1: Systems Analysis,'' \textit{Systems Analysis \& Design Course}, Universidad Distrital Francisco José de Caldas, 2026.
+\bibitem{b2} T. Hong, H. Taylor-Lange, S. D'Oca, D. Yan, and S. Corgnati, ``Advances in research and applications of energy-related occupant behavior in buildings,'' \textit{Energy and Buildings}, vol. 116, pp. 694-702, 2016.
+\bibitem{b3} A. Williams, B. Atkinson, K. Garbesi, E. Page, and F. Rubinstein, ``Lighting Controls in Commercial Buildings,'' \textit{LEUKOS}, vol. 8, no. 3, pp. 161-180, 2012.
+\bibitem{b4} S. R. G. Jones, ``Was there a Hawthorne effect?,'' \textit{American Journal of Sociology}, vol. 98, no. 3, pp. 451-468, 1992.
+\end{thebibliography}
+
+\end{document}
